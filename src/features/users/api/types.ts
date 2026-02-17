@@ -1,3 +1,14 @@
+export const SUBSCRIPTION = [
+  'voicetraining_monthly',
+  'voicetraining_yearly',
+  'voicetraining_pro_monthly',
+  'voicetraining_pro_yearly',
+  'voicetraining_yearly_new',
+  'voicetraining_yearly_pro_new',
+] as const;
+
+export type TSubscription = (typeof SUBSCRIPTION)[number];
+
 export type TUsersParams = {
   page?: string;
   limit?: string;
@@ -6,6 +17,7 @@ export type TUsersParams = {
   isActive?: boolean;
   startDate?: string;
   endDate?: string;
+  subSku?: TSubscription[];
 };
 
 export type TUser = {

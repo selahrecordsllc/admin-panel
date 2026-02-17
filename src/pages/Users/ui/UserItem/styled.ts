@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const UserItemStyled = styled(StyledItem)`
   > div {
     &:nth-child(1) {
-      min-width: 281px;
+      min-width: 240px;
       align-items: center;
       span {
         display: flex;
@@ -20,17 +20,24 @@ export const UserItemStyled = styled(StyledItem)`
       }
     }
     &:nth-child(2) {
-      min-width: 251px;
+      min-width: 230px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     &:nth-child(3) {
-      min-width: 188px;
-    }
-    &:nth-child(4) {
       min-width: 160px;
     }
+    &:nth-child(4) {
+      min-width: 150px;
+    }
     &:nth-child(5) {
-      min-width: 200px;
+      min-width: 140px;
       align-items: center;
+    }
+
+    &:nth-child(6) {
+      min-width: 160px;
     }
   }
 `;

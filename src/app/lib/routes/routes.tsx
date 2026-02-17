@@ -1,22 +1,21 @@
 import {
-  Users,
+  CreateExercise,
   ErrorPage,
+  Exercises,
   Login,
   TrainingTypes,
-  Exercises,
-  CreateExercise,
+  Users,
+  Video,
 } from 'pages/index';
-import { PrivateRoute } from 'shared/index';
-import { Layout } from 'widgets/index';
 import { NotFound } from 'pages/NotFound/NotFound';
 import { createHashRouter } from 'react-router-dom';
 import { ERoutes } from 'shared/enums';
+import { PrivateRoute } from 'shared/index';
+import { Layout } from 'widgets/index';
 
 export const withPrivate = (Component: React.ComponentType) => {
   const Wrapped = () => <PrivateRoute component={<Component />} />;
-  Wrapped.displayName = `WithPrivate(${
-    Component.displayName || Component.name || 'Component'
-  })`;
+  Wrapped.displayName = `WithPrivate(${Component.displayName || Component.name || 'Component'})`;
   return Wrapped;
 };
 
@@ -53,6 +52,10 @@ export const routes = createHashRouter([
       {
         path: ERoutes.exercises_edit,
         element: <CreateExercise />,
+      },
+      {
+        path: ERoutes.video,
+        element: <Video />,
       },
     ],
   },

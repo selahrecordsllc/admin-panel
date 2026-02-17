@@ -1,14 +1,14 @@
-import { deleteExercise, TExercise, TExrciseRes } from 'features/exercises';
-import { StyledExerciseItem } from './styled';
-import { useTranslation } from 'react-i18next';
-import { EditButton, Modal, useToggle } from 'shared/index';
-import { IoTrashBinOutline } from 'react-icons/io5';
-import { getLinkWithParams } from 'shared/utils';
-import { ERoutes } from 'shared/enums';
-import { DeleteModal } from 'widgets/index';
-import { KeyedMutator } from 'swr';
-import toast from 'react-hot-toast';
 import { AudioPlayer } from 'entities/index';
+import { deleteExercise, TExercise, TExrciseRes } from 'features/exercises';
+import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import { IoTrashBinOutline } from 'react-icons/io5';
+import { ERoutes } from 'shared/enums';
+import { EditButton, Modal, useToggle } from 'shared/index';
+import { getLinkWithParams } from 'shared/utils';
+import { KeyedMutator } from 'swr';
+import { DeleteModal } from 'widgets/index';
+import { StyledExerciseItem } from './styled';
 
 type Tprops = { item: TExercise; mutate: KeyedMutator<TExrciseRes> };
 
@@ -41,12 +41,10 @@ export const ExerciseItem = ({ item, mutate }: Tprops) => {
       <Modal isOpen={isOpen} closeModal={toggle}>
         <DeleteModal close={toggle} onDeleteClick={onDeleteClick} />
       </Modal>
-      <StyledExerciseItem>
+      <StyledExerciseItem $isFree={item.isFree}>
         <div>{item.title}</div>
         <div>
-          {item.type?.length
-            ? item.type?.map((el, i) => <p key={el._id + i}>{el.title}</p>)
-            : '-'}
+          {item.type?.length ? item.type?.map((el, i) => <p key={el._id + i}>{el.title}</p>) : '-'}
         </div>
         <div>
           {item.difficulty?.length
@@ -66,9 +64,7 @@ export const ExerciseItem = ({ item, mutate }: Tprops) => {
           <AudioPlayer src={audioUrl} />
         </div>
         <div>
-          <EditButton
-            link={getLinkWithParams(ERoutes.exercises_edit, { id: item._id })}
-          />
+          <EditButton link={getLinkWithParams(ERoutes.exercises_edit, { id: item._id })} />
           <EditButton outlined EditIcon={IoTrashBinOutline} onClick={toggle} />
         </div>
       </StyledExerciseItem>

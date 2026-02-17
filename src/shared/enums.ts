@@ -6,4 +6,5 @@ export enum ERoutes {
   exercises_create = '/exercises/create',
   exercises_edit = '/exercises/:id',
   training_type = '/training-type',
+  video = '/video',
 }

@@ -1,15 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import Select, { CSSObjectWithLabel } from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { useTheme } from 'styled-components';
 import { ErrorP, SelectWrap } from './styled';
 import { SelectInputProp } from './types';
-import { useTranslation } from 'react-i18next';
-import { useTheme } from 'styled-components';
-import makeAnimated from 'react-select/animated';
 
 export const SelectInput = ({
   width = '335px',
   height = '44px',
   label,
   error,
+  borderRadius,
   ...selectProps
 }: SelectInputProp) => {
   const { t } = useTranslation('menu');
@@ -32,19 +33,17 @@ export const SelectInput = ({
         <Select
           components={{ ...animatedComponents, IndicatorSeparator: () => null }}
           {...selectProps}
-          styles={customStyles}
+          styles={{ ...customStyles, ...selectProps.styles }}
           noOptionsMessage={() => t('noOptions')}
           theme={theme => ({
             ...theme,
-            borderRadius: 8,
+            borderRadius: borderRadius || 8,
             colors: {
               ...theme.colors,
               primary25: mainTheme.colors.borderInputGrey,
               primary: mainTheme.colors.primary,
               primary50: mainTheme.colors.pageBackground,
-              neutral20: error
-                ? mainTheme.colors.errorRed
-                : mainTheme.colors.borderInputGrey,
+              neutral20: error ? mainTheme.colors.errorRed : mainTheme.colors.borderInputGrey,
               neutral30: mainTheme.colors.borderInputGrey,
             },
           })}

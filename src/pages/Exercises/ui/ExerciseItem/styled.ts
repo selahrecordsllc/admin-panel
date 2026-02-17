@@ -1,9 +1,11 @@
 import { StyledItem } from 'shared/index';
 import styled from 'styled-components';
 
-export const StyledExerciseItem = styled(StyledItem)`
+export const StyledExerciseItem = styled(StyledItem)<{ $isFree?: boolean }>`
   min-height: 68px;
   height: fit-content;
+  background-color: ${({ $isFree, theme }) =>
+    $isFree ? theme.colors.pageBackground : theme.colors.white};
   > div {
     &:nth-child(1) {
       min-width: 196px;

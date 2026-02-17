@@ -8,7 +8,7 @@ export type TDefaultParams = {
 };
 export const defaultParams: TDefaultParams = {
   page: '1',
-  limit: '10',
+  limit: '100',
   sortBy: 'createdAt',
   order: '-1',
 };

@@ -14,9 +14,7 @@ export const isValidAudioUrl = (url: string): boolean => {
 export const exerciseSchema = z
   .object({
     name: z.string().min(1, { message: t('errors:fieldRequired') }),
-    difficulty: z
-      .array(z.string())
-      .min(1, { message: t('errors:fieldRequired') }),
+    difficulty: z.array(z.string()).min(1, { message: t('errors:fieldRequired') }),
     type: z.array(z.string()).min(1, { message: t('errors:fieldRequired') }),
     manual: z.string().optional(),
     manualFile: z.instanceof(File).optional(),
@@ -24,6 +22,8 @@ export const exerciseSchema = z
     urlFile: z.instanceof(File).optional(),
     urlLenth: z.number().optional(),
     manualLenth: z.number().optional(),
+    description: z.string().optional(),
+    isFree: z.boolean(),
   })
   .superRefine((data, ctx) => {
     // manual check

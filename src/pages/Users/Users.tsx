@@ -1,15 +1,14 @@
+import { useGetUsers } from 'features/users';
 import { useTranslation } from 'react-i18next';
 import { Box, HeadingWrap, PageWrapper } from 'shared/index';
-import { Filterbar, UserItem } from './ui';
 import { BottomWrap, SortBar } from 'widgets/index';
 import { columns } from './column';
 import { useGetUsersFilter } from './model/useGetUsersFilter';
-import { useGetUsers } from 'features/users';
+import { Filterbar, UserItem } from './ui';
 
 const Dashboard = () => {
   const { t } = useTranslation('users');
-  const { params, onArrowClick, onSortClick, onPageClick, handleLimitPage } =
-    useGetUsersFilter();
+  const { params, onArrowClick, onSortClick, onPageClick, handleLimitPage } = useGetUsersFilter();
 
   const statusVariant = { inactive: false, active: true };
 
@@ -23,6 +22,7 @@ const Dashboard = () => {
       : undefined,
     endDate: params?.dateRange?.[1] || undefined,
     startDate: params?.dateRange?.[0] || undefined,
+    subSku: params?.subSku?.length ? params.subSku : undefined,
   });
 
   return (

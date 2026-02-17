@@ -1,5 +1,7 @@
 import { formatISO, setHours, setMinutes } from 'date-fns';
+import { TSubscription } from 'features/users';
 import { useSearchParams } from 'react-router-dom';
+type UpdateParamsMode = 'toggle' | 'replace';
 
 export type TDefaultUsersParams = {
   dateRange: string[];
@@ -8,33 +10,63 @@ export type TDefaultUsersParams = {
   sortBy: string;
   order: '1' | '-1';
   status?: string;
+  subSku: TSubscription[];
 };
 
 export const defaultParams: TDefaultUsersParams = {
   dateRange: [],
   page: '1',
-  limit: '10',
+  limit: '100',
   sortBy: 'createdAt',
   order: '-1',
   status: undefined,
+  subSku: [],
 };
 
 export const useGetUsersFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams(defaultParams);
 
-  const updateParam = (
-    name: keyof TDefaultUsersParams,
-    value: string | null
+  const updateParams = (
+    updates: Partial<Record<keyof TDefaultUsersParams, string | string[] | null>>,
+    mode: UpdateParamsMode = 'replace'
   ) => {
-    setSearchParams(prev => {
-      const newParams = Object.fromEntries(prev.entries());
-      if (!value) {
-        delete newParams[name];
-      } else {
-        newParams[name] = value;
-      }
-      return newParams;
-    });
+    setSearchParams(
+      prev => {
+        const newParams = Object.fromEntries(prev.entries());
+
+        Object.entries(updates).forEach(([key, value]) => {
+          const current = newParams[key]?.split(',') ?? [];
+
+          if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
+            delete newParams[key];
+          } else if (Array.isArray(value)) {
+            if (mode === 'replace') {
+              newParams[key] = value.join(',');
+            } else if (mode === 'toggle') {
+              const updated = [...current];
+              value.forEach(val => {
+                const index = updated.indexOf(val);
+                if (index !== -1) {
+                  updated.splice(index, 1);
+                } else {
+                  updated.push(val);
+                }
+              });
+              if (updated.length > 0) {
+                newParams[key] = updated.join(',');
+              } else {
+                delete newParams[key];
+              }
+            }
+          } else {
+            newParams[key] = value ?? '';
+          }
+        });
+
+        return newParams;
+      },
+      { replace: true }
+    );
   };
 
   const onSortClick = (sortingBy: string) => {
@@ -51,7 +83,7 @@ export const useGetUsersFilter = () => {
   };
 
   const onArrowClick = () => {
-    updateParam('order', searchParams.get('order') === '1' ? '-1' : '1');
+    updateParams({ order: searchParams.get('order') === '1' ? '-1' : '1' });
   };
 
   const handleDateRangeChange = (update: [Date | null, Date | null]) => {
@@ -77,6 +109,7 @@ export const useGetUsersFilter = () => {
     ...defaultParams,
     ...rawParams,
     dateRange: rawParams.dateRange?.split(',') || [],
+    subSku: rawParams.subSku ? (rawParams.subSku.split(',') as TSubscription[]) : [],
   } as TDefaultUsersParams;
 
   const handleLimitPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -90,7 +123,7 @@ export const useGetUsersFilter = () => {
 
   const onPageClick = ({ selected }: { selected: number }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    updateParam('page', (selected + 1).toString());
+    updateParams({ page: (selected + 1).toString() });
   };
 
   return {
@@ -98,7 +131,7 @@ export const useGetUsersFilter = () => {
     onPageClick,
     setSearchParams,
     handleDateRangeChange,
-    updateParam,
+    updateParams,
     searchParams,
     onSortClick,
     onArrowClick,

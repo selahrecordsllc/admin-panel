@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  frontend:
+    build: .
+    container_name: voice-training_admin_prod
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:4008:80'

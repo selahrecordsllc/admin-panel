@@ -1,7 +1,7 @@
 import { TExerciseForm } from 'pages/CreateExercise/types';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Box, RightEditWrap } from 'shared/index';
+import { Box, Inputs, RightEditWrap } from 'shared/index';
 
 import { AudioInput } from '../AudioInput/AudioInput';
 
@@ -9,6 +9,8 @@ export const UploadFiles = () => {
   const {
     formState: { errors },
     setValue,
+    register,
+    control,
   } = useFormContext<TExerciseForm>();
   const { t } = useTranslation('exercises');
 
@@ -18,7 +20,7 @@ export const UploadFiles = () => {
       <Box $flexDirection="column" $gap="20px">
         <AudioInput
           key={123}
-          label={t('instruction')}
+          label={t('plus')}
           fileField="manualFile"
           urlField="manual"
           errorFile={errors?.manualFile?.message}
@@ -28,7 +30,7 @@ export const UploadFiles = () => {
 
         <AudioInput
           key={321}
-          label={t('exercise')}
+          label={t('minus')}
           fileField="urlFile"
           urlField="url"
           errorFile={errors?.urlFile?.message}
@@ -36,6 +38,19 @@ export const UploadFiles = () => {
           onMetadataLoad={value => setValue('urlLenth', value.duration)}
         />
       </Box>
+      <Inputs.TextArea width="345px" {...register('description')} label={t('description')} />
+      <Controller
+        control={control}
+        name="isFree"
+        render={({ field: { value, onChange } }) => (
+          <Box $gap="12px" onClick={() => onChange(!value)}>
+            <Inputs.Checkbox value={value} />
+            <Box width="fit-content" as={'p'}>
+              {t('isFree')}
+            </Box>
+          </Box>
+        )}
+      />
     </RightEditWrap>
   );
 };

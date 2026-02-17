@@ -24,13 +24,13 @@ export const columns = [
   //   minWidth: '123px',
   // },
   {
-    labelKey: 'exercises:instruction',
+    labelKey: 'exercises:plus',
     sortKey: 'createdAt',
     isSortable: false,
     minWidth: '220px',
   },
   {
-    labelKey: 'exercises:exercise',
+    labelKey: 'exercises:minus',
     sortKey: 'createdAt',
     isSortable: false,
     minWidth: '220px',

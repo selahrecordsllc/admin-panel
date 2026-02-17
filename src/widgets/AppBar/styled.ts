@@ -61,7 +61,7 @@ export const StyledLogo = styled(Link)`
   }
   p {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     /* height: 14px; */
   }
   img {

@@ -1,8 +1,8 @@
 import { createExercise, editExercise, TExercise } from 'features/exercises';
-import { TExerciseForm } from '../types';
-import toast from 'react-hot-toast';
 import { t } from 'i18next';
 import { UseFormReset } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { TExerciseForm } from '../types';
 
 const apiurl = import.meta.env.VITE_BASE_URL;
 
@@ -19,6 +19,13 @@ export const creteExerciseHandler = async (data: TExerciseForm) => {
     formData.append('title', data.name);
     data.difficulty?.forEach(el => formData.append('difficulty[]', el));
     data.type?.forEach(el => formData.append('type[]', el));
+
+    if (data.description?.length) {
+      formData.append('description', data.description);
+    } else {
+      formData.append('description', 'null');
+    }
+
     if (data.manual?.length) {
       formData.append('manual', data.manual);
     }
@@ -32,10 +39,8 @@ export const creteExerciseHandler = async (data: TExerciseForm) => {
       formData.append('urlFile', data.urlFile);
     }
     formData.append('urlLenth', data.urlLenth ? data.urlLenth.toString() : '0');
-    formData.append(
-      'manualLenth',
-      data.manualLenth ? data.manualLenth.toString() : '0'
-    );
+    formData.append('isFree', data.isFree + '');
+    formData.append('manualLenth', data.manualLenth ? data.manualLenth.toString() : '0');
 
     await createExercise(formData);
     return true;
@@ -46,17 +51,18 @@ export const creteExerciseHandler = async (data: TExerciseForm) => {
   }
 };
 
-export const editExerciseHandler = async (
-  data: TExerciseForm,
-  id: string,
-  prevData: TExercise
-) => {
+export const editExerciseHandler = async (data: TExerciseForm, id: string, prevData: TExercise) => {
   try {
     const formData = new FormData();
     formData.append('title', data.name);
     data.difficulty?.forEach(el => formData.append('difficulty[]', el));
     data.type?.forEach(el => formData.append('type[]', el));
 
+    if (data.description?.length) {
+      formData.append('description', data.description);
+    } else {
+      formData.append('description', 'null');
+    }
     // manual
     const newManual = stripAudioPath(data.manual);
     if (newManual && newManual !== prevData.manual?.url) {
@@ -75,10 +81,8 @@ export const editExerciseHandler = async (
       formData.append('urlFile', data.urlFile);
     }
     formData.append('urlLenth', data.urlLenth ? data.urlLenth.toString() : '0');
-    formData.append(
-      'manualLenth',
-      data.manualLenth ? data.manualLenth.toString() : '0'
-    );
+    formData.append('isFree', data.isFree + '');
+    formData.append('manualLenth', data.manualLenth ? data.manualLenth.toString() : '0');
     await editExercise(formData, id);
     return true;
   } catch (error) {
@@ -88,21 +92,16 @@ export const editExerciseHandler = async (
   }
 };
 
-export const setDefaultData = (
-  data: TExercise,
-  reset: UseFormReset<TExerciseForm>
-) => {
+export const setDefaultData = (data: TExercise, reset: UseFormReset<TExerciseForm>) => {
   reset({
     name: data.title,
     difficulty: data.difficulty,
     type: data.type?.map(el => el._id),
-    manual: data.manual?.url?.startsWith('http')
-      ? data.manual.url
-      : audioPath + data.manual?.url,
-    url: data.url?.url?.startsWith('http')
-      ? data.url?.url
-      : audioPath + data.url?.url,
+    manual: data.manual?.url?.startsWith('http') ? data.manual.url : audioPath + data.manual?.url,
+    url: data.url?.url?.startsWith('http') ? data.url?.url : audioPath + data.url?.url,
     urlLenth: data?.url?.lenth || 0,
     manualLenth: data?.manual?.lenth,
+    description: data?.description,
+    isFree: !!data.isFree,
   });
 };

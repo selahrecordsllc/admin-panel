@@ -5,5 +5,6 @@ const ErrorPage = lazy(() => import('./ErrorPage/ErrorPage'));
 const TrainingTypes = lazy(() => import('./TrainingTypes/TrainingTypes'));
 const Exercises = lazy(() => import('./Exercises/Exercises'));
 const CreateExercise = lazy(() => import('./CreateExercise/CreateExercise'));
+const Video = lazy(() => import('./Video/Video'));
 
-export { Users, ErrorPage, TrainingTypes, Exercises, CreateExercise };
+export { CreateExercise, ErrorPage, Exercises, TrainingTypes, Users, Video };

@@ -1,0 +1,13 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          script:
+            - echo "🚀 Deploying to server..."
+            - ssh-keyscan -p $SERVER_PORT -H $SERVER_IP >> ~/.ssh/known_hosts
+            - ssh -p $SERVER_PORT $SERVER_USER@$SERVER_IP " cd ~/apps/voice-training_admin_prod &&
+              git checkout main && git pull origin main && docker compose down --remove-orphans &&
+              docker compose up -d --build && docker image prune -f"

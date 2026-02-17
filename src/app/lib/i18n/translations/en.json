@@ -27,7 +27,8 @@
     "enter": "Enter",
     "select_date": "Select date",
     "filter": "Filter",
-    "language": "Language"
+    "language": "Language",
+    "video": "Video"
   },
   "errors": {
     "fieldRequired": "The field is required",
@@ -52,7 +53,22 @@
     "email": "E-mail",
     "subscriptionDate": "Subscription date",
     "subscriptionUntil": "Valid until",
-    "subscriptionStatus": "Subscription status"
+    "subscriptionStatus": "Subscription status",
+    "status": "Status",
+    "subscriptionType": "Subscription type",
+    "subscriptions": {
+      "voicetraining_monthly": "Voice Training — Monthly",
+      "voicetraining_yearly": "Voice Training — Yearly",
+      "voicetraining_pro_monthly": "Voice Training Pro — Monthly",
+      "voicetraining_pro_yearly": "Voice Training Pro — Yearly",
+      "voicetraining_yearly_new": "New Voice Training — Yearly",
+      "voicetraining_yearly_pro_new": "New Voice Training Pro — Yearly",
+      "light_month": "Light — Monthly",
+      "light_year": "Light — Yearly",
+      "pro_month": "Pro — Monthly",
+      "pro_year": "Pro — Yearly"
+    },
+    "subscription": "Subscription"
   },
   "training_types": {
     "title": "Add new training type",
@@ -89,6 +105,19 @@
     "trainingSavedTitle": "Training saved",
     "trainingSavedDescription": "It will appear in the app and be available to users.",
     "close": "Close",
-    "create": "Create"
+    "create": "Create",
+    "plus": "Plus",
+    "minus": "Minus",
+    "description": "Description",
+    "isFree": "Free exercise",
+    "change": "Change",
+    "clear": "Clear",
+    "new": "New",
+    "saved": "Saved",
+    "instructionVideo": "Instruction",
+    "trainingVideo": "Warm up",
+    "supportsOnly": "Only mp4 is supported.",
+    "unsupportedType": "Unsupported file type. Please upload an MP4 video.",
+    "hint": "Upload or drag video here"
   }
 }

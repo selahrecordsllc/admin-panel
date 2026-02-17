@@ -29,7 +29,8 @@
     "enter": "Вход",
     "select_date": "Выбрать дату",
     "filter": "Фильтр",
-    "language": "Язык"
+    "language": "Язык",
+    "video": "Видео"
   },
   "errors": {
     "fieldRequired": "Поле обязательно для заполнения",
@@ -54,7 +55,22 @@
     "email": "E-mail",
     "subscriptionDate": "Дата подписки",
     "subscriptionUntil": "Подписка до",
-    "subscriptionStatus": "Статус подписки"
+    "subscriptionStatus": "Статус подписки",
+    "status": "Статус",
+    "subscriptionType": "Тип подписки",
+    "subscriptions": {
+      "voicetraining_monthly": "Тренировка голоса — ежемесячно",
+      "voicetraining_yearly": "Тренировка голоса — ежегодно",
+      "voicetraining_pro_monthly": "Тренировка голоса Pro — ежемесячно",
+      "voicetraining_pro_yearly": "Тренировка голоса Pro — ежегодно",
+      "voicetraining_yearly_new": "Новая тренировка голоса — ежегодно",
+      "voicetraining_yearly_pro_new": "Новая тренировка голоса Pro — ежегодно",
+      "light_month": "Лайт — Месяц",
+      "light_year": "Лайт — Год",
+      "pro_month": "Про — Месяц",
+      "pro_year": "Про — Год"
+    },
+    "subscription": "Подписка"
   },
   "training_types": {
     "title": "Добавить новый тип тренировки",
@@ -91,6 +107,19 @@
     "trainingSavedTitle": "Тренировка сохранена",
     "trainingSavedDescription": "Она будет отображаться в приложении и доступна пользователям.",
     "close": "Закрыть",
-    "create": "Создать"
+    "create": "Создать",
+    "plus": "Плюс",
+    "minus": "Минус",
+    "description": "Описание",
+    "isFree": "Бесплатное упражнение",
+    "change": "Заменить",
+    "clear": "Очистить",
+    "new": "Новое",
+    "saved": "Сохраненное",
+    "instructionVideo": "Инструкция",
+    "trainingVideo": "Разминка",
+    "supportsOnly": "Поддерживается только mp4.",
+    "unsupportedType": "Неподдерживаемый тип файла. Пожалуйста, загрузите видео в формате MP4.",
+    "hint": "Загрузите видео или перетащите его сюда"
   }
 }

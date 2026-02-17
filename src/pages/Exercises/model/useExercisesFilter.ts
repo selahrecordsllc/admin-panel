@@ -13,7 +13,7 @@ type UpdateParamsMode = 'toggle' | 'replace';
 export const defaultParams: TDefaultParams = {
   type: [],
   page: '1',
-  limit: '10',
+  limit: '100',
   sortBy: 'createdAt',
   order: '-1',
   difficulty: [],
@@ -32,11 +32,7 @@ export const useGetExercisesFilter = () => {
       Object.entries(updates).forEach(([key, value]) => {
         const current = newParams[key]?.split(',') ?? [];
 
-        if (
-          value === null ||
-          value === '' ||
-          (Array.isArray(value) && value.length === 0)
-        ) {
+        if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
           delete newParams[key];
         } else if (Array.isArray(value)) {
           if (mode === 'replace') {
@@ -102,9 +98,7 @@ export const useGetExercisesFilter = () => {
     ...defaultParams,
     ...rawParams,
     type: searchParams.get('type') ? searchParams.get('type')?.split(',') : [],
-    difficulty: searchParams.get('difficulty')
-      ? searchParams.get('difficulty')?.split(',')
-      : [],
+    difficulty: searchParams.get('difficulty') ? searchParams.get('difficulty')?.split(',') : [],
   } as typeof defaultParams;
 
   return {

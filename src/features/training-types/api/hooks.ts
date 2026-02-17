@@ -33,9 +33,7 @@ export const useGettrainingTypesInfinite = (params?: TTrainingTypesparams) => {
     isLoading,
     size,
     setSize,
-  } = useSWRInfinite(getKey, ([, par]) => getTrainingTypes(par), {
-    revalidateFirstPage: false,
-  });
+  } = useSWRInfinite(getKey, ([, par]) => getTrainingTypes(par), {});
   const totalCount = trainingTypesData?.[0]?.totalCount || 0;
   const trainingTypes =
     trainingTypesData?.flatMap(item => item.docs.flat()) || [];

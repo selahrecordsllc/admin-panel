@@ -22,3 +22,9 @@ export const StatusList = styled.ul`
     }
   }
 `;
+export const ClearLi = styled.li`
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid ${({ theme }) => theme.colors.pageBackground};
+  align-content: center;
+`;

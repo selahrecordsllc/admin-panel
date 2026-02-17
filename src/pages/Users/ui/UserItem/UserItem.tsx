@@ -1,9 +1,9 @@
-import { TUser } from 'features/users';
-import { StatusSpan, UserItemStyled } from './styled';
-import { CustomImage } from 'shared/index';
 import { format, parseISO } from 'date-fns';
 import { enGB, ru } from 'date-fns/locale';
+import { TUser } from 'features/users';
 import { useTranslation } from 'react-i18next';
+import { CustomImage } from 'shared/index';
+import { StatusSpan, UserItemStyled } from './styled';
 type TProps = {
   item: TUser;
 };
@@ -16,10 +16,7 @@ export const UserItem = ({ item }: TProps) => {
     i18n: { language },
   } = useTranslation('users');
 
-  const isSubscriptionActive = (
-    subDate: string,
-    unSubDate: string
-  ): boolean => {
+  const isSubscriptionActive = (subDate: string, unSubDate: string): boolean => {
     if (!subDate || !unSubDate) {
       return false;
     }
@@ -58,11 +55,10 @@ export const UserItem = ({ item }: TProps) => {
       <div>{formatDate(item.subDate)}</div>
       <div>{formatDate(item.unSubDate)}</div>
       <div>
-        {item.subDate ? (
-          <StatusSpan $isActive={isSubscription}></StatusSpan>
-        ) : null}
+        {item.subDate ? <StatusSpan $isActive={isSubscription}></StatusSpan> : null}
         {item.subDate ? (isSubscription ? t('active') : t('inactive')) : '-'}
       </div>
+      <div>{item.subSku ? t('subscriptions.' + item.subSku) : '-'}</div>
     </UserItemStyled>
   );
 };

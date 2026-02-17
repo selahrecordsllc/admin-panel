@@ -30,6 +30,8 @@ export type TExercise = {
   manual?: TAudioInfo;
   url?: TAudioInfo;
   title: string;
+  description?: string;
+  isFree: boolean;
 };
 
 export type TExrciseRes = {

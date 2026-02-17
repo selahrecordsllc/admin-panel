@@ -1,5 +1,7 @@
 export type UploadProps = {
-  error?: boolean;
-  onClick?: () => void;
   isRound?: boolean;
+  onClick?: () => void;
+  onDrop?: (e: React.DragEvent) => void;
+  onDragOver?: (e: React.DragEvent) => void;
+  error?: boolean;
 };
